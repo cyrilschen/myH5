@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive JavaScript Interface Test</title>
+</head>
+<body>
+    <h1>Comprehensive JavaScript Interface Test</h1>
+    <button onclick="testXMLHttpRequest()">Test XMLHttpRequest</button>
+    <button onclick="testFetch()">Test Fetch</button>
+    <button onclick="testConsoleLog()">Test Console Log</button>
+    <button onclick="testGeolocation()">Test Geolocation</button>
+    <button onclick="testLocalStorage()">Test LocalStorage</button>
+    <button onclick="testSessionStorage()">Test SessionStorage</button>
+    <button onclick="testCookie()">Test Cookie</button>
+    <button onclick="testAlert()">Test Alert</button>
+    <button onclick="testPrompt()">Test Prompt</button>
+    <button onclick="testConfirm()">Test Confirm</button>
+    <button onclick="testNavigator()">Test Navigator</button>
+    <button onclick="testDocumentTitle()">Test Document Title</button>
+
+    <div id="output"></div>
+
+    <script>
+        // 覆盖 XMLHttpRequest
+        (function() {
+            const originalXhrOpen = XMLHttpRequest.prototype.open;
+            const originalXhrSend = XMLHttpRequest.prototype.send;
+
+            XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+                this._url = url; // 保存请求的URL
+                return originalXhrOpen.apply(this, arguments);
+            };
+
+            XMLHttpRequest.prototype.send = function(body) {
+                console.log(`Request made to: ${this._url}`);
+                console.log(`Request body: ${body}`);
+                
+                this.addEventListener('load', function() {
+                    console.log(`Response from: ${this._url}`);
+                    console.log(`Response body: ${this.responseText}`);
+                });
+
+                return originalXhrSend.apply(this, arguments);
+            };
+        })();
+
+        // 覆盖 fetch
+        (function() {
+            const originalFetch = window.fetch;
+
+            window.fetch = function(input, init) {
+                console.log(`Fetch request made to: ${input}`);
+                if (init && init.body) {
+                    console.log(`Request body: ${init.body}`);
+                }
+
+                return originalFetch.apply(this, arguments).then(response => {
+                    const clonedResponse = response.clone();
+                    clonedResponse.text().then(body => {
+                        console.log(`Response from: ${input}`);
+                        console.log(`Response body: ${body}`);
+                    });
+                    return response;
+                });
+            };
+        })();
+
+        // 覆盖 console.log
+        (function() {
+            const originalLog = console.log;
+
+            console.log = function(...args) {
+                const output = document.getElementById('output');
+                output.innerHTML += `<p>${args.join(' ')}</p>`;
+                originalLog.apply(console, args);
+            };
+        })();
+
+        // 覆盖 geolocation
+        (function() {
+            const originalGetCurrentPosition = navigator.geolocation.getCurrentPosition;
+
+            navigator.geolocation.getCurrentPosition = function(success, error, options) {
+                const fakePosition = {
+                    coords: {
+                        latitude: 37.7749, // 伪造的纬度
+                        longitude: -122.4194 // 伪造的经度
+                    }
+                };
+                success(fakePosition);
+            };
+        })();
+
+        // 覆盖 localStorage
+        (function() {
+            const originalSetItem = localStorage.setItem;
+            const originalGetItem = localStorage.getItem;
+
+            localStorage.setItem = function(key, value) {
+                console.log(`localStorage set: ${key} = ${value}`);
+                return originalSetItem.apply(this, arguments);
+            };
+
+            localStorage.getItem = function(key) {
+                console.log(`localStorage get: ${key}`);
+                return originalGetItem.apply(this, arguments);
+            };
+        })();
+
+        // 覆盖 sessionStorage
+        (function() {
+            const originalSetItem = sessionStorage.setItem;
+            const originalGetItem = sessionStorage.getItem;
+
+            sessionStorage.setItem = function(key, value) {
+                console.log(`sessionStorage set: ${key} = ${value}`);
+                return originalSetItem.apply(this, arguments);
+            };
+
+            sessionStorage.getItem = function(key) {
+                console.log(`sessionStorage get: ${key}`);
+                return originalGetItem.apply(this, arguments);
+            };
+        })();
+
+        //

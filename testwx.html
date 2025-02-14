@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html><head><meta charset="UTF-8"><title>微信客服</title><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover"><link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.4.1/weui.min.css"><link rel="icon" type="image/png" sizes="16x16" href="https://wwcdn.weixin.qq.com/node/wework/images/32.cd01ba3084.png"><link rel="icon" type="image/png" sizes="32x32" href="https://wwcdn.weixin.qq.com/node/wework/images/32.cd01ba3084.png"><link rel="icon" type="image/png" sizes="48x48" href="https://wwcdn.weixin.qq.com/node/wework/images/48.262c2271dd.png"></head><style>html,
+body {
+margin: 0;
+padding: 0;
+}
+a, a:link, a:visited, a:hover, a:active {
+color: #267EF0;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+.cnt {
+text-align: center;
+font-weight: 500;
+font-size: 20px;
+line-height: 28px;
+padding: 240px 10px 20px;
+}
+.btn {
+display: inline-block;
+padding: 0px 10px;
+box-sizing: border-box;
+min-width: 152px;
+background: #1EBD43;
+border-radius: 4px;
+height: 32px;
+line-height: 32px;
+font-weight: 400;
+font-size: 14px;
+color: #FFFFFF !important;
+text-decoration: none !important;
+position: relative;
+overflow: hidden;
+}
+.btn:hover {
+background-color: #44C966;
+}
+.btn:active::before {
+content: ' ';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: #000;
+opacity: 0.2;
+}
+.icon_warp {
+line-height: 0;
+}
+.loading_icon {
+display: inline-block;
+width: 58px;
+height: 58px;
+background: url(https://wwcdn.weixin.qq.com/node/wework/images/Ring.3a641d732c.png) center no-repeat;
+background-size: 58px 58px;
+-webkit-animation: myRotate 1s linear infinite;
+animation: myRotate 1s linear infinite;
+}
+@-webkit-keyframes myRotate{
+0%{ -webkit-transform: rotate(0deg);}
+50%{ -webkit-transform: rotate(180deg);}
+100%{ -webkit-transform: rotate(360deg);}
+}
+@keyframes myRotate{
+0%{ -webkit-transform: rotate(0deg);}
+50%{ -webkit-transform: rotate(180deg);}
+100%{ -webkit-transform: rotate(360deg);}
+}
+.warning_icon {
+display: inline-block;
+width: 60px;
+height: 60px;
+background: url(https://wwcdn.weixin.qq.com/node/wework/images/Subtract.2967c6dab3.svg) center no-repeat;
+background-size: 60px 60px;
+}
+.pcpage_qrcode_noInstallDesc {
+text-align: left;
+font-weight: 400;
+font-size: 14px;
+color: rgba(10, 17, 26, 0.5);
+line-height: 1.4;
+width: 320px;
+margin: 28px auto 0;
+border-top: 1px solid rgba(6, 15, 26, 0.07);
+padding-top: 24px;
+}
+.pcpage_qrcode_link {
+position: relative;
+}
+.pcpage_qrcode_cnt {
+position: absolute;
+left: -73px;
+top: 32px;
+background-color: #fff;
+box-shadow: 0px 1px 5px rgba(128, 128, 128, 0.24), 0px 8px 40px rgba(0, 0, 0, 0.24);
+line-height: 0;
+padding: 16px;
+border-radius: 6px;
+display: none;
+cursor: default;
+width: 216px;
+height: 216px;
+box-sizing: border-box;
+}
+.pcpage_qrcode_cnt::after {
+display: block;
+content: " ";
+width: 0;
+line-height: 0;
+font-size: 0;
+border-style: solid;
+border-color: transparent;
+position: absolute;
+left: 50%;
+margin-left: -9px;
+border-width: 8px 9px;
+border-top: 0;
+border-bottom-color: #fff;
+top: -8px;
+z-index: 2;
+}
+.pcpage_qrcode_cnt::before {
+position: absolute;
+content: " ";
+height: 32px;
+top: -20px;
+left: 0;
+right: 0;
+background-color: transparent;
+}
+.pcpage_qrcode_cnt img {
+width: 100%;
+height: 100%;
+}
+.pcpage_qrcode_link:hover .pcpage_qrcode_cnt {
+display: block;
+}</style><body><div class="cnt">  <div id="js_open_loading"><div class="icon_warp"><span class="loading_icon"></span></div><div style="margin-top: 23px">打开微信咨询客服</div></div><div id="js_open_fail" style="display: none"><div>本地未安装微信客户端？</div><div style="margin-top: 32px"><a href="https://weixin.qq.com/" class="btn" onclick="reportInPage('pc_enter_wechat_web_download')">下载微信咨询客服</a></div><div class="pcpage_qrcode_noInstallDesc"><div>已安装微信客户端但无咨询入口：</div><div style="margin-top: 4px">1. 将微信客户端升级至最新版本3.8.1后重试</div><div>2. 还可以用手机微信扫码咨询客服，<a href="javascript:;" class="pcpage_qrcode_link" id="js_qrocde_link" onmouseover="reportInPage('pc_enter_wechat_web_code')">查看二维码 <div class="pcpage_qrcode_cnt" id="js_qrocde_cnt"><img src="" id="js_qrcode_img"></div></a></div></div></div>  </div></body><script>function reportInPage(key, kv) {
+new Image(1, 1).src = '/wework_admin/report?type=img&r=' + Math.random() + '&q=' + encodeURIComponent('st:sgkvuin_report=' + JSON.stringify({
+kv: 79506013,
+key: key,
+value: 1,
+strid: 'kfc464bb7d647b9e2a6',
+}));
+}
+reportInPage('pc_enter_wechat_web')</script>  <script>(function() {
+function S(id) {
+return document.getElementById(id);
+}
+var schemaUrl = 'xweixin://jumptokfchat/'
++ '?kfid=' + encodeURIComponent('kfc464bb7d647b9e2a6')
++ '&scene=' + encodeURIComponent('50')
++ '&ext_params=' + encodeURIComponent('refkey=');
+setTimeout(function() {
+location.href = schemaUrl;
+}, 300);
+setTimeout(function() {
+S('js_open_loading').style.display = 'none';
+S('js_open_fail').style.display = 'block';
+}, 5000);
+if (S('js_qrcode_img')) {
+S('js_qrcode_img').src = '/kf/kefu/qrcode?kfcode='
++ encodeURIComponent('kfc464bb7d647b9e2a6')
++ (location.search ? '&' + location.search.slice(1) : '');
+}
+})()</script>  </html>

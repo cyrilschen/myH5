@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频自动播放验证</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <video id="myVideo" autoplay muted loop>
+        <source src="https://appasset.xverse.cn/1/video/7bec2076c931443cbb3aebb17b85f979/OpeningTV.mp4" type="video/mp4">
+        您的浏览器不支持HTML5视频标签。
+    </video>
+
+    <script>
+        // 检查视频是否自动播放
+        const video = document.getElementById('myVideo');
+        video.onplay = function() {
+            console.log('视频正在播放');
+        };
+        video.onerror = function() {
+            console.error('视频播放出错');
+        };
+    </script>
+</body>
+</html>
